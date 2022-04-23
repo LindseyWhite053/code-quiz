@@ -1,0 +1,58 @@
+body {
+ background: white; 
+ font-family: sans-serif;
+ font-weight: bold;
+}
+
+header {
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+header a {
+    color:#d54240;
+}
+
+header a:hover {
+    color: #eab18d;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#container {
+width: 450px;
+background: white;
+padding:50px; 
+}
+
+#start-button {
+    padding: 5px 40px;
+    margin: 15px;
+    font-size: 15px;
+    background-color: #d54240;
+    color:white;
+    border-radius: 10px;
+}
+
+#answer-button {
+    Width: 400px;
+    padding: 10px 40px;
+    margin: 10px;
+    font-size: 15px;
+    background-color: #d54240;
+    color:white;
+    border-radius: 10px;
+}
+
+#start-button:hover {
+    background-color: #eab18d;
+}
+
+#answer-button:hover {
+    background-color: #eab18d;
+}
