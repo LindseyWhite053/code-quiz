@@ -30,16 +30,7 @@ background: white;
 padding:50px; 
 }
 
-#start-button {
-    padding: 5px 40px;
-    margin: 15px;
-    font-size: 15px;
-    background-color: #d54240;
-    color:white;
-    border-radius: 10px;
-}
-
-#answer-button {
+.answer-button {
     Width: 400px;
     padding: 10px 40px;
     margin: 10px;
@@ -53,6 +44,6 @@ padding:50px;
     background-color: #eab18d;
 }
 
-#answer-button:hover {
+.answer-button:hover {
     background-color: #eab18d;
 }
