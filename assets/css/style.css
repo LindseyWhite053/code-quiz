@@ -47,3 +47,11 @@ padding:50px;
 .answer-button:hover {
     background-color: #eab18d;
 }
+
+#confirmation{
+    font-size: 20px;
+    color: grey;
+    border-top: 3px solid;
+    margin: 10px;
+    padding: 10px;
+}

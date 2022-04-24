@@ -28,7 +28,7 @@ timerEl.textContent = "Timer: " + timeLeft;
       timeLeft--;
     } // TODO: Add comments describing the functionality of the `else if` statement:
     else {
-        timerEl.textContent = "Quiz has ended" 
+        timerEl.textContent = "Timer: 0" 
         clearInterval(timeInterval);
     }
   }, 1000);
@@ -76,13 +76,31 @@ choiceFourEl.addEventListener("click", questionTwoIncorrect);
 };
 
 function questionTwoIncorrect() {
-alert("Incorrect");
+    // timeLeft -= 10;
+    pageContentEl.innerHTML = "<h1>The condition in an if/else  statement is enclosed with _____. </h1>";
+    // answerOneEl.innerHTML = "quotes";
+    // answerTwoEl.innerHTML = "curly brackets";
+    // answerThreeEl.innerHTML = "parenthesis";
+    // answerFourEl.innerHTML = "square brackets";
+
+    var confirmationEl = document.createElement("p");
+    confirmationEl.id = "confirmation";
+    confirmationEl.innerHTML = "Incorrect answer provided"
+    pageContentEl.appendChild(confirmationEl);
 
 }
 
 function questionTwoCorrect() {
-    alert("Correct");
+    pageContentEl.innerHTML = "<h1>The condition in an if/else  statement is enclosed with _____. </h1>";
+    // answerOneEl.innerHTML = "quotes";
+    // answerTwoEl.innerHTML = "curly brackets";
+    // answerThreeEl.innerHTML = "parenthesis";
+    // answerFourEl.innerHTML = "square brackets";
 
+    var confirmationEl = document.createElement("p");
+    confirmationEl.id = "confirmation";
+    confirmationEl.innerHTML = "Correct answer!";
+    pageContentEl.appendChild(confirmationEl);
 }
     
 
