@@ -13,6 +13,8 @@ startButtonEl.className = "answer-button";
 startButtonEl.innerHTML = "Start Quiz";
 pageContentEl.appendChild(startButtonEl);
 
+var startQuizEl = document.querySelector('#start-button');
+
 var answerOneEl = document.createElement("button");
 answerOneEl.id = "choice-one";
 answerOneEl.className = "answer-button";
@@ -38,16 +40,10 @@ confirmationEl.id = "confirmation";
 confirmationEl.innerHTML = ""
 
 
-var startQuizEl = document.querySelector('#start-button');
-
-
-
 function startQuiz() {
-questionOne();
-var startQuizEl = document.querySelector('#start-button');
-
 
 timerEl.textContent = "Timer: " + timeLeft;
+    questionOne();
 
   var timeInterval = setInterval(function () {
     // TODO: Add comments describing the functionality of the `if` statement:
@@ -61,6 +57,19 @@ timerEl.textContent = "Timer: " + timeLeft;
     }
   }, 1000);
 };
+
+function incorrectAnswer () {
+    timeLeft -= 10;
+
+    confirmationEl.innerHTML = "Incorrect answer provided."
+    pageContentEl.appendChild(confirmationEl);
+}
+
+function correctAnswer() {
+    confirmationEl.innerHTML = "Correct answer!"
+    pageContentEl.appendChild(confirmationEl);
+}
+
 
 function questionOne(){
 pageContentEl.innerHTML = "<h1>Commonly used data types do NOT include?</h1>"
@@ -95,8 +104,7 @@ choiceFourEl.addEventListener("click", questionOneIncorrect);
 
 };
 
-function questionOneIncorrect() {
-    timeLeft -= 10;
+function questionTwo () {
     pageContentEl.innerHTML = "<h1>The condition in an if/else  statement is enclosed with _____. </h1>";
     answerOneEl.innerHTML = "quotes";
     answerTwoEl.innerHTML = "curly brackets";
@@ -107,7 +115,6 @@ function questionOneIncorrect() {
     pageContentEl.appendChild(answerTwoEl);
     pageContentEl.appendChild(answerThreeEl);
     pageContentEl.appendChild(answerFourEl);
-
 
     confirmationEl.innerHTML = "Incorrect answer provided."
     pageContentEl.appendChild(confirmationEl);
@@ -124,38 +131,21 @@ function questionOneIncorrect() {
     var choiceFourEl = document.querySelector("#choice-four");
     choiceFourEl.addEventListener("click", questionTwoIncorrect);
 
+}
+
+function questionOneIncorrect() {
+    questionTwo();
+ 
+    incorrectAnswer();
 }
 
 function questionOneCorrect() {
-    pageContentEl.innerHTML = "<h1>The condition in an if/else  statement is enclosed with _____. </h1>";
-    answerOneEl.innerHTML = "quotes";
-    answerTwoEl.innerHTML = "curly brackets";
-    answerThreeEl.innerHTML = "parenthesis";
-    answerFourEl.innerHTML = "square brackets";
+    questionTwo();
 
-    pageContentEl.appendChild(answerOneEl);
-    pageContentEl.appendChild(answerTwoEl);
-    pageContentEl.appendChild(answerThreeEl);
-    pageContentEl.appendChild(answerFourEl);
-
-    confirmationEl.innerHTML = "Correct answer!"
-    pageContentEl.appendChild(confirmationEl);
-
-    var choiceOneEl = document.querySelector("#choice-one");
-    choiceOneEl.addEventListener("click", questionTwoIncorrect);
-
-    var choiceTwoEl = document.querySelector("#choice-two");
-    choiceTwoEl.addEventListener("click", questionTwoCorrect);
-
-    var choiceThreeEl = document.querySelector("#choice-three");
-    choiceThreeEl.addEventListener("click", questionTwoIncorrect);
-
-    var choiceFourEl = document.querySelector("#choice-four");
-    choiceFourEl.addEventListener("click", questionTwoIncorrect);
+    correctAnswer();
 }
 
-function questionTwoIncorrect() {
-    timeLeft -= 10;
+function questionThree() {
     pageContentEl.innerHTML = "<h1>Arrays in JavaScript can be used to store ___ . </h1>";
     answerOneEl.innerHTML = "numbers and strings";
     answerTwoEl.innerHTML = "other arrays";
@@ -166,10 +156,6 @@ function questionTwoIncorrect() {
     pageContentEl.appendChild(answerTwoEl);
     pageContentEl.appendChild(answerThreeEl);
     pageContentEl.appendChild(answerFourEl);
-
-
-    confirmationEl.innerHTML = "Incorrect answer provided."
-    pageContentEl.appendChild(confirmationEl);
 
     var choiceOneEl = document.querySelector("#choice-one");
     choiceOneEl.addEventListener("click", questionThreeIncorrect);
@@ -183,38 +169,22 @@ function questionTwoIncorrect() {
     var choiceFourEl = document.querySelector("#choice-four");
     choiceFourEl.addEventListener("click", questionThreeCorrect);
 
+}
+
+
+function questionTwoIncorrect() {
+    questionThree();
+    
+    incorrectAnswer();
 }
 
 function questionTwoCorrect() {
-    pageContentEl.innerHTML = "<h1>Arrays in JavaScript can be used to store ___ . </h1>";
-    answerOneEl.innerHTML = "numbers and strings";
-    answerTwoEl.innerHTML = "other arrays";
-    answerThreeEl.innerHTML = "booleans";
-    answerFourEl.innerHTML = "all of the above";
+    questionThree();
 
-    pageContentEl.appendChild(answerOneEl);
-    pageContentEl.appendChild(answerTwoEl);
-    pageContentEl.appendChild(answerThreeEl);
-    pageContentEl.appendChild(answerFourEl);
-
-    confirmationEl.innerHTML = "Correct answer!"
-    pageContentEl.appendChild(confirmationEl);
-
-    var choiceOneEl = document.querySelector("#choice-one");
-    choiceOneEl.addEventListener("click", questionThreeIncorrect);
-
-    var choiceTwoEl = document.querySelector("#choice-two");
-    choiceTwoEl.addEventListener("click", questionThreeIncorrect);
-
-    var choiceThreeEl = document.querySelector("#choice-three");
-    choiceThreeEl.addEventListener("click", questionThreeIncorrect);
-
-    var choiceFourEl = document.querySelector("#choice-four");
-    choiceFourEl.addEventListener("click", questionThreeCorrect);
+    correctAnswer();
 }
 
-function questionThreeIncorrect() {
-    timeLeft -= 10;
+function questionFour() {
     pageContentEl.innerHTML = "<h1>String values must be enclosed within _____ when being assigned variables. </h1>";
     answerOneEl.innerHTML = "commas";
     answerTwoEl.innerHTML = "curly braces";
@@ -226,10 +196,6 @@ function questionThreeIncorrect() {
     pageContentEl.appendChild(answerThreeEl);
     pageContentEl.appendChild(answerFourEl);
 
-
-    confirmationEl.innerHTML = "Incorrect answer provided."
-    pageContentEl.appendChild(confirmationEl);
-
     var choiceOneEl = document.querySelector("#choice-one");
     choiceOneEl.addEventListener("click", questionFourIncorrect);
 
@@ -242,38 +208,21 @@ function questionThreeIncorrect() {
     var choiceFourEl = document.querySelector("#choice-four");
     choiceFourEl.addEventListener("click", questionFourIncorrect);
 
+}
+
+function questionThreeIncorrect() {
+    questionFour();
+    
+    incorrectAnswer();
 }
 
 function questionThreeCorrect() {
-    pageContentEl.innerHTML = "<h1>	String values must be enclosed within _____ when being assigned variables. </h1>";
-    answerOneEl.innerHTML = "commas";
-    answerTwoEl.innerHTML = "curly braces";
-    answerThreeEl.innerHTML = "quotes";
-    answerFourEl.innerHTML = "parenthesis";
+    questionFour();
 
-    pageContentEl.appendChild(answerOneEl);
-    pageContentEl.appendChild(answerTwoEl);
-    pageContentEl.appendChild(answerThreeEl);
-    pageContentEl.appendChild(answerFourEl);
-
-    confirmationEl.innerHTML = "Correct answer!"
-    pageContentEl.appendChild(confirmationEl);
-
-    var choiceOneEl = document.querySelector("#choice-one");
-    choiceOneEl.addEventListener("click", questionFourIncorrect);
-
-    var choiceTwoEl = document.querySelector("#choice-two");
-    choiceTwoEl.addEventListener("click", questionFourIncorrect);
-
-    var choiceThreeEl = document.querySelector("#choice-three");
-    choiceThreeEl.addEventListener("click", questionFourCorrect);
-
-    var choiceFourEl = document.querySelector("#choice-four");
-    choiceFourEl.addEventListener("click", questionFourIncorrect);
+    correctAnswer();
 }
 
-function questionFourIncorrect() {
-    timeLeft -= 10;
+function questionFive () {
     pageContentEl.innerHTML = "<h1>	A very useful tool used during development and debugging for printing content to the debugger is: </h1>";
     answerOneEl.innerHTML = "JavaScript";
     answerTwoEl.innerHTML = "Terminal/bash";
@@ -284,39 +233,6 @@ function questionFourIncorrect() {
     pageContentEl.appendChild(answerTwoEl);
     pageContentEl.appendChild(answerThreeEl);
     pageContentEl.appendChild(answerFourEl);
-
-
-    confirmationEl.innerHTML = "Incorrect answer provided."
-    pageContentEl.appendChild(confirmationEl);
-
-    var choiceOneEl = document.querySelector("#choice-one");
-    choiceOneEl.addEventListener("click", questionFourIncorrect);
-
-    var choiceTwoEl = document.querySelector("#choice-two");
-    choiceTwoEl.addEventListener("click", questionFourIncorrect);
-
-    var choiceThreeEl = document.querySelector("#choice-three");
-    choiceThreeEl.addEventListener("click", questionFourCorrect);
-
-    var choiceFourEl = document.querySelector("#choice-four");
-    choiceFourEl.addEventListener("click", questionFourIncorrect);
-
-}
-
-function questionFourCorrect() {
-    pageContentEl.innerHTML = "<h1>	A very useful tool used during development and debugging for printing content to the debugger is: </h1>";
-    answerOneEl.innerHTML = "JavaScript";
-    answerTwoEl.innerHTML = "Terminal/bash";
-    answerThreeEl.innerHTML = "for loops";
-    answerFourEl.innerHTML = "console.log";
-
-    pageContentEl.appendChild(answerOneEl);
-    pageContentEl.appendChild(answerTwoEl);
-    pageContentEl.appendChild(answerThreeEl);
-    pageContentEl.appendChild(answerFourEl);
-
-    confirmationEl.innerHTML = "Correct answer!"
-    pageContentEl.appendChild(confirmationEl);
 
     var choiceOneEl = document.querySelector("#choice-one");
     choiceOneEl.addEventListener("click", questionFiveIncorrect);
@@ -331,27 +247,38 @@ function questionFourCorrect() {
     choiceFourEl.addEventListener("click", questionFiveCorrect);
 }
 
+function questionFourIncorrect() {
+   questionFive();
+   
+   incorrectAnswer();
+}
+
+function questionFourCorrect() {
+    questionFive();
+
+    correctAnswer();
+}
+
+function playerScore (){
+    pageContentEl.innerHTML = "<h1>	Your final score is " + timeLeft + "!</h1>";
+
+    playerScoreEl = document.createElement("input")
+
+}
+
 function questionFiveIncorrect() {
-    timeLeft -= 10;
-    pageContentEl.innerHTML = "<h1>	Your final score is... </h1>";
-
-    confirmationEl.innerHTML = "Incorrect answer provided."
-    pageContentEl.appendChild(confirmationEl);
-
+    playerScore();
+    
+    incorrectAnswer();
 }
 
 function questionFiveCorrect() {
-    confirmationEl.innerHTML = "Correct answer!"
-    pageContentEl.appendChild(confirmationEl);
-    
-    pageContentEl.innerHTML = "<h1>	Your final score is... </h1>";
+    playerScore();
 
-    confirmationEl.innerHTML = "Correct answer!"
-    pageContentEl.appendChild(confirmationEl);
-
+    correctAnswer();
 }
 
-    
+
 // function highScoreSubmit () {
 // var score = timeLeft 
 // var highscore = localStorage.getItem("highscore");
