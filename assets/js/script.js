@@ -35,19 +35,36 @@ answerFourEl.id = "choice-four";
 answerFourEl.className = "answer-button";
 answerFourEl.innerHTML = "";
 
+var choiceOneEl = document.querySelector("#choice-one");
+// choiceOneEl.addEventListener("click", onClick);
+
+var choiceTwoEl = document.querySelector("#choice-two");
+// choiceTwoEl.addEventListener("click", onClick);
+
+var choiceThreeEl = document.querySelector("#choice-three");
+// choiceThreeEl.addEventListener("click", onClick);
+
+var choiceFourEl = document.querySelector("#choice-four");
+// choiceFourEl.addEventListener("click", onClick);
+
 var confirmationEl = document.createElement("p");
 confirmationEl.id = "confirmation";
 confirmationEl.innerHTML = ""
 
+var retryButtonEl = document.createElement("button");
+retryButtonEl.id = "retry-button";
+retryButtonEl.className = "answer-button";
+retryButtonEl.innerHTML = "Try again";
 
-function startQuiz() {
+var quizEnd = "";
 
-timerEl.textContent = "Timer: " + timeLeft;
-    questionOne();
-
+function timeInterval() {
   var timeInterval = setInterval(function () {
     // TODO: Add comments describing the functionality of the `if` statement:
-    if (timeLeft > 1) {
+    if (quizEnd === true) {
+        clearInterval(timeInterval);
+    }
+    else if (timeLeft > 1) {
         timerEl.textContent = "Timer: " + timeLeft;
       timeLeft--;
     } // TODO: Add comments describing the functionality of the `else if` statement:
@@ -56,6 +73,15 @@ timerEl.textContent = "Timer: " + timeLeft;
         clearInterval(timeInterval);
     }
   }, 1000);
+}
+
+function startQuiz() {
+    
+    timerEl.textContent = "Timer: " + timeLeft;
+
+    questionOne();
+    
+    timeInterval();
 };
 
 function incorrectAnswer () {
@@ -120,15 +146,19 @@ function questionTwo () {
     pageContentEl.appendChild(confirmationEl);
 
     var choiceOneEl = document.querySelector("#choice-one");
+    choiceOneEl.removeEventListener("click", questionOneIncorrect);
     choiceOneEl.addEventListener("click", questionTwoIncorrect);
 
     var choiceTwoEl = document.querySelector("#choice-two");
-    choiceTwoEl.addEventListener("click", questionTwoCorrect);
+    choiceTwoEl.removeEventListener("click", questionOneIncorrect);
+    choiceTwoEl.addEventListener("click", questionTwoIncorrect);
 
     var choiceThreeEl = document.querySelector("#choice-three");
-    choiceThreeEl.addEventListener("click", questionTwoIncorrect);
+    choiceThreeEl.removeEventListener("click", questionOneCorrect);
+    choiceThreeEl.addEventListener("click", questionTwoCorrect);
 
     var choiceFourEl = document.querySelector("#choice-four");
+    choiceFourEl.removeEventListener("click", questionOneIncorrect);
     choiceFourEl.addEventListener("click", questionTwoIncorrect);
 
 }
@@ -137,12 +167,15 @@ function questionOneIncorrect() {
     questionTwo();
  
     incorrectAnswer();
+
+    console.log ("question incorrect");
 }
 
 function questionOneCorrect() {
     questionTwo();
 
     correctAnswer();
+    console.log("question correct");
 }
 
 function questionThree() {
@@ -158,15 +191,20 @@ function questionThree() {
     pageContentEl.appendChild(answerFourEl);
 
     var choiceOneEl = document.querySelector("#choice-one");
+    choiceOneEl.removeEventListener("click", questionTwoIncorrect);
     choiceOneEl.addEventListener("click", questionThreeIncorrect);
 
     var choiceTwoEl = document.querySelector("#choice-two");
+    choiceTwoEl.removeEventListener("click", questionTwoIncorrect);
     choiceTwoEl.addEventListener("click", questionThreeIncorrect);
 
     var choiceThreeEl = document.querySelector("#choice-three");
+    choiceThreeEl.removeEventListener("click", questionTwoCorrect);
     choiceThreeEl.addEventListener("click", questionThreeIncorrect);
+    
 
     var choiceFourEl = document.querySelector("#choice-four");
+    choiceFourEl.removeEventListener("click", questionTwoIncorrect);
     choiceFourEl.addEventListener("click", questionThreeCorrect);
 
 }
@@ -176,12 +214,16 @@ function questionTwoIncorrect() {
     questionThree();
     
     incorrectAnswer();
+
+    console.log ("question incorrect");
 }
 
 function questionTwoCorrect() {
     questionThree();
 
     correctAnswer();
+
+    console.log ("question Correct");
 }
 
 function questionFour() {
@@ -197,15 +239,19 @@ function questionFour() {
     pageContentEl.appendChild(answerFourEl);
 
     var choiceOneEl = document.querySelector("#choice-one");
+    choiceOneEl.removeEventListener("click", questionThreeIncorrect);
     choiceOneEl.addEventListener("click", questionFourIncorrect);
 
     var choiceTwoEl = document.querySelector("#choice-two");
+    choiceTwoEl.removeEventListener("click", questionThreeIncorrect);
     choiceTwoEl.addEventListener("click", questionFourIncorrect);
 
     var choiceThreeEl = document.querySelector("#choice-three");
+    choiceThreeEl.removeEventListener("click", questionThreeIncorrect);
     choiceThreeEl.addEventListener("click", questionFourCorrect);
 
     var choiceFourEl = document.querySelector("#choice-four");
+    choiceFourEl.removeEventListener("click", questionThreeCorrect);
     choiceFourEl.addEventListener("click", questionFourIncorrect);
 
 }
@@ -214,12 +260,16 @@ function questionThreeIncorrect() {
     questionFour();
     
     incorrectAnswer();
+
+    console.log ("question incorrect");
 }
 
 function questionThreeCorrect() {
     questionFour();
 
     correctAnswer();
+
+    console.log ("question Correct");
 }
 
 function questionFive () {
@@ -235,15 +285,19 @@ function questionFive () {
     pageContentEl.appendChild(answerFourEl);
 
     var choiceOneEl = document.querySelector("#choice-one");
+    choiceOneEl.removeEventListener("click", questionFourIncorrect);
     choiceOneEl.addEventListener("click", questionFiveIncorrect);
 
     var choiceTwoEl = document.querySelector("#choice-two");
+    choiceTwoEl.removeEventListener("click", questionFourIncorrect);
     choiceTwoEl.addEventListener("click", questionFiveIncorrect);
 
     var choiceThreeEl = document.querySelector("#choice-three");
+    choiceThreeEl.removeEventListener("click", questionFourCorrect);
     choiceThreeEl.addEventListener("click", questionFiveIncorrect);
 
     var choiceFourEl = document.querySelector("#choice-four");
+    choiceFourEl.removeEventListener("click", questionFourIncorrect);
     choiceFourEl.addEventListener("click", questionFiveCorrect);
 }
 
@@ -251,18 +305,33 @@ function questionFourIncorrect() {
    questionFive();
    
    incorrectAnswer();
+
+   console.log ("question incorrect");
 }
 
 function questionFourCorrect() {
     questionFive();
 
     correctAnswer();
+
+    console.log ("question Correct");
 }
 
 function playerScore (){
+    quizEnd = true
+    timerEl.textContent = ""; 
     pageContentEl.innerHTML = "<h1>	Your final score is " + timeLeft + "!</h1>";
+    
+    var playerScoreEl = document.createElement("input");
+    playerScoreEl.type = "text";
+    playerScoreEl.placeholder = "Enter your name"
+    pageContentEl.appendChild(playerScoreEl);
 
-    playerScoreEl = document.createElement("input")
+    var submitButtonEl = document.createElement("button");
+    submitButtonEl.id = "submit-button";
+    submitButtonEl.className = "answer-button";
+    submitButtonEl.innerHTML = "Submit your score";
+    pageContentEl.appendChild(submitButtonEl);
 
 }
 
@@ -277,6 +346,14 @@ function questionFiveCorrect() {
 
     correctAnswer();
 }
+
+// function tryAgain () {
+//     pageContentEl.innerHTML = "<h1>	Would you like to try again?</h1>";
+
+//     pageContentEl.appendChild(retryButtonEl);
+
+//     retryButtonEl.addEventListener("click", startQuiz);
+// }
 
 
 // function highScoreSubmit () {
