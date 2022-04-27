@@ -15,6 +15,7 @@ pageContentEl.appendChild(startButtonEl);
 
 var startQuizEl = document.querySelector('#start-button');
 
+
 var answerOneEl = document.createElement("button");
 answerOneEl.id = "choice-one";
 answerOneEl.className = "answer-button";
@@ -36,16 +37,13 @@ answerFourEl.className = "answer-button";
 answerFourEl.innerHTML = "";
 
 var choiceOneEl = document.querySelector("#choice-one");
-// choiceOneEl.addEventListener("click", onClick);
 
 var choiceTwoEl = document.querySelector("#choice-two");
-// choiceTwoEl.addEventListener("click", onClick);
 
 var choiceThreeEl = document.querySelector("#choice-three");
-// choiceThreeEl.addEventListener("click", onClick);
 
 var choiceFourEl = document.querySelector("#choice-four");
-// choiceFourEl.addEventListener("click", onClick);
+
 
 var confirmationEl = document.createElement("p");
 confirmationEl.id = "confirmation";
@@ -61,22 +59,28 @@ var quizEnd = "";
 function timeInterval() {
   var timeInterval = setInterval(function () {
     // TODO: Add comments describing the functionality of the `if` statement:
-    if (quizEnd === true) {
+    if (quizEnd == true) {
         clearInterval(timeInterval);
+        timerEl.textContent = ""
     }
-    else if (timeLeft > 1) {
+    else if (timeLeft <= 0) {
+        tryAgain ();
+        
+        clearInterval(timeInterval);
+        timerEl.textContent = ""
+    }
+    else if (timeLeft >= 1) {
         timerEl.textContent = "Timer: " + timeLeft;
       timeLeft--;
-    } // TODO: Add comments describing the functionality of the `else if` statement:
-    else {
-        timerEl.textContent = "Timer: 0" 
-        clearInterval(timeInterval);
-    }
+    } 
   }, 1000);
 }
 
 function startQuiz() {
     
+    if (timeLeft == 0){
+        timeLeft = 75;
+    }
     timerEl.textContent = "Timer: " + timeLeft;
 
     questionOne();
@@ -130,10 +134,26 @@ choiceFourEl.addEventListener("click", questionOneIncorrect);
 
 };
 
+function questionOneIncorrect() {
+    questionTwo();
+ 
+    incorrectAnswer();
+
+    console.log ("question incorrect");
+}
+
+function questionOneCorrect() {
+    questionTwo();
+
+    correctAnswer();
+    console.log("question correct");
+}
+
+
 function questionTwo () {
     pageContentEl.innerHTML = "<h1>The condition in an if/else  statement is enclosed with _____. </h1>";
     answerOneEl.innerHTML = "quotes";
-    answerTwoEl.innerHTML = "curly brackets";
+    answerTwoEl.innerHTML = "curly braces";
     answerThreeEl.innerHTML = "parenthesis";
     answerFourEl.innerHTML = "square brackets";
 
@@ -163,19 +183,20 @@ function questionTwo () {
 
 }
 
-function questionOneIncorrect() {
-    questionTwo();
- 
+function questionTwoIncorrect() {
+    questionThree();
+    
     incorrectAnswer();
 
     console.log ("question incorrect");
 }
 
-function questionOneCorrect() {
-    questionTwo();
+function questionTwoCorrect() {
+    questionThree();
 
     correctAnswer();
-    console.log("question correct");
+
+    console.log ("question Correct");
 }
 
 function questionThree() {
@@ -209,17 +230,16 @@ function questionThree() {
 
 }
 
-
-function questionTwoIncorrect() {
-    questionThree();
+function questionThreeIncorrect() {
+    questionFour();
     
     incorrectAnswer();
 
     console.log ("question incorrect");
 }
 
-function questionTwoCorrect() {
-    questionThree();
+function questionThreeCorrect() {
+    questionFour();
 
     correctAnswer();
 
@@ -256,21 +276,21 @@ function questionFour() {
 
 }
 
-function questionThreeIncorrect() {
-    questionFour();
+function questionFourIncorrect() {
+    questionFive();
     
     incorrectAnswer();
-
+ 
     console.log ("question incorrect");
-}
-
-function questionThreeCorrect() {
-    questionFour();
-
-    correctAnswer();
-
-    console.log ("question Correct");
-}
+ }
+ 
+ function questionFourCorrect() {
+     questionFive();
+ 
+     correctAnswer();
+ 
+     console.log ("question Correct");
+ }
 
 function questionFive () {
     pageContentEl.innerHTML = "<h1>	A very useful tool used during development and debugging for printing content to the debugger is: </h1>";
@@ -301,20 +321,16 @@ function questionFive () {
     choiceFourEl.addEventListener("click", questionFiveCorrect);
 }
 
-function questionFourIncorrect() {
-   questionFive();
-   
-   incorrectAnswer();
-
-   console.log ("question incorrect");
+function questionFiveIncorrect() {
+    playerScore();
+    
+    incorrectAnswer();
 }
 
-function questionFourCorrect() {
-    questionFive();
+function questionFiveCorrect() {
+    playerScore();
 
     correctAnswer();
-
-    console.log ("question Correct");
 }
 
 function playerScore (){
@@ -335,25 +351,13 @@ function playerScore (){
 
 }
 
-function questionFiveIncorrect() {
-    playerScore();
-    
-    incorrectAnswer();
+
+function tryAgain () {
+    pageContentEl.innerHTML = "<h1>	Your time has run out. Would you like to try again?</h1>";
+    pageContentEl.appendChild(retryButtonEl);
+    retryButtonEl.addEventListener("click", startQuiz);
 }
 
-function questionFiveCorrect() {
-    playerScore();
-
-    correctAnswer();
-}
-
-// function tryAgain () {
-//     pageContentEl.innerHTML = "<h1>	Would you like to try again?</h1>";
-
-//     pageContentEl.appendChild(retryButtonEl);
-
-//     retryButtonEl.addEventListener("click", startQuiz);
-// }
 
 
 // function highScoreSubmit () {

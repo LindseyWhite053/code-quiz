@@ -48,10 +48,17 @@ padding:50px;
     background-color: #eab18d;
 }
 
-#confirmation{
+#confirmation {
     font-size: 20px;
     color: grey;
     border-top: 3px solid;
     margin: 10px;
     padding: 10px;
+}
+
+#player-name {
+    text-align: center;
+    height: 20px;
+    width: 300px; 
+
 }
