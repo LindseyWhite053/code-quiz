@@ -1,6 +1,6 @@
 # Code Quiz
 
-##A beginners JavaScript quiz which starts a 75 second countdown when the quiz begins. When an answer is answered incorrectly the time will reduce by 10 seconds. Once all questions are answered the remaining time will be logged as the users score. The user will be able to log their initials and score into the highscore list logged in the localStorage. 
+## A beginners JavaScript quiz which starts a 75 second countdown when the quiz begins. When an answer is answered incorrectly the time will reduce by 10 seconds. Once all questions are answered the remaining time will be logged as the users score. The user will be able to log their initials and score into the highscore list logged in the localStorage. 
 
 ## Built With 
 * HTML
