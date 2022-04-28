@@ -10,11 +10,11 @@ header {
     justify-content: space-between;
 }
 
-header a {
+header p {
     color:#d54240;
 }
 
-header a:hover {
+header p:hover {
     color: #eab18d;
 }
 
@@ -46,6 +46,14 @@ padding:50px;
 
 .answer-button:hover {
     background-color: #eab18d;
+}
+
+#high-score {
+    color: #d54240;
+}
+
+#high-score:hover {
+    color: #eab18d
 }
 
 #confirmation {

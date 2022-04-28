@@ -1,6 +1,11 @@
-var timerEl = document.querySelector('#timer');
 var mainEl = document.querySelector('main');
+var timerEl = document.querySelector('#timer');
 var timeLeft = 75;
+var viewHighscoreEl = document.querySelector("#high-score");
+var quizEnd = "";
+
+var highscores = JSON.parse(localStorage.getItem ("existing")) || []
+
 
 var pageContentEl = document.createElement("div");
 pageContentEl.id = "container";
@@ -14,6 +19,7 @@ startButtonEl.innerHTML = "Start Quiz";
 pageContentEl.appendChild(startButtonEl);
 
 var startQuizEl = document.querySelector('#start-button');
+var highscoreEl = document.querySelector('#high-score');
 
 
 var answerOneEl = document.createElement("button");
@@ -45,20 +51,28 @@ var choiceThreeEl = document.querySelector("#choice-three");
 var choiceFourEl = document.querySelector("#choice-four");
 
 
-var confirmationEl = document.createElement("p");
+var confirmationEl = document.createElement("h2");
 confirmationEl.id = "confirmation";
 confirmationEl.innerHTML = ""
+
 
 var retryButtonEl = document.createElement("button");
 retryButtonEl.id = "retry-button";
 retryButtonEl.className = "answer-button";
 retryButtonEl.innerHTML = "Try again";
 
-var quizEnd = "";
+
+function tryAgain () {
+    pageContentEl.innerHTML = "<h1>	Your time has run out. Would you like to try again?</h1>";
+    pageContentEl.appendChild(retryButtonEl);
+    retryButtonEl.addEventListener("click", startQuiz);
+}
+
 
 function timeInterval() {
   var timeInterval = setInterval(function () {
-    // TODO: Add comments describing the functionality of the `if` statement:
+
+
     if (quizEnd == true) {
         clearInterval(timeInterval);
         timerEl.textContent = ""
@@ -78,7 +92,7 @@ function timeInterval() {
 
 function startQuiz() {
     
-    if (timeLeft == 0){
+    if (timeLeft === 0){
         timeLeft = 75;
     }
     timerEl.textContent = "Timer: " + timeLeft;
@@ -135,17 +149,19 @@ choiceFourEl.addEventListener("click", questionOneIncorrect);
 };
 
 function questionOneIncorrect() {
+    incorrectAnswer();
+
     questionTwo();
  
-    incorrectAnswer();
 
     console.log ("question incorrect");
 }
 
 function questionOneCorrect() {
+    correctAnswer();
+
     questionTwo();
 
-    correctAnswer();
     console.log("question correct");
 }
 
@@ -162,8 +178,8 @@ function questionTwo () {
     pageContentEl.appendChild(answerThreeEl);
     pageContentEl.appendChild(answerFourEl);
 
-    confirmationEl.innerHTML = "Incorrect answer provided."
-    pageContentEl.appendChild(confirmationEl);
+    // confirmationEl.innerHTML = "Incorrect answer provided."
+    // pageContentEl.appendChild(confirmationEl);
 
     var choiceOneEl = document.querySelector("#choice-one");
     choiceOneEl.removeEventListener("click", questionOneIncorrect);
@@ -184,17 +200,19 @@ function questionTwo () {
 }
 
 function questionTwoIncorrect() {
+    incorrectAnswer();
+
     questionThree();
     
-    incorrectAnswer();
 
     console.log ("question incorrect");
 }
 
 function questionTwoCorrect() {
+    correctAnswer();
+
     questionThree();
 
-    correctAnswer();
 
     console.log ("question Correct");
 }
@@ -231,17 +249,17 @@ function questionThree() {
 }
 
 function questionThreeIncorrect() {
+    incorrectAnswer();
     questionFour();
     
-    incorrectAnswer();
 
     console.log ("question incorrect");
 }
 
 function questionThreeCorrect() {
+    correctAnswer();
     questionFour();
 
-    correctAnswer();
 
     console.log ("question Correct");
 }
@@ -277,17 +295,17 @@ function questionFour() {
 }
 
 function questionFourIncorrect() {
+    incorrectAnswer();
     questionFive();
     
-    incorrectAnswer();
  
     console.log ("question incorrect");
  }
  
  function questionFourCorrect() {
+     correctAnswer();
      questionFive();
  
-     correctAnswer();
  
      console.log ("question Correct");
  }
@@ -322,15 +340,15 @@ function questionFive () {
 }
 
 function questionFiveIncorrect() {
-    playerScore();
-    
     incorrectAnswer();
+    
+    playerScore();
 }
 
 function questionFiveCorrect() {
-    playerScore();
-
     correctAnswer();
+    
+    playerScore();
 }
 
 function playerScore (){
@@ -340,7 +358,8 @@ function playerScore (){
     
     var playerScoreEl = document.createElement("input");
     playerScoreEl.type = "text";
-    playerScoreEl.placeholder = "Enter your name"
+    playerScoreEl.name = "user-name";
+    playerScoreEl.placeholder = "Enter your initials"
     pageContentEl.appendChild(playerScoreEl);
 
     var submitButtonEl = document.createElement("button");
@@ -349,38 +368,54 @@ function playerScore (){
     submitButtonEl.innerHTML = "Submit your score";
     pageContentEl.appendChild(submitButtonEl);
 
+    submitButtonEl.addEventListener("click", scoreFormHandler);
 }
 
 
-function tryAgain () {
-    pageContentEl.innerHTML = "<h1>	Your time has run out. Would you like to try again?</h1>";
-    pageContentEl.appendChild(retryButtonEl);
-    retryButtonEl.addEventListener("click", startQuiz);
+var displayHighscores = function() {
+    
+    pageContentEl.innerHTML = "<h1>Highscores</h1>";
+   
+    var highscores = JSON.parse(localStorage.getItem ("existing"))
+    console.log(typeof highscores);
+
+    for (var i = 0; i < highscores.length; i++) {
+        // createHighscore(highscores[i])
+        var newElement = document.createElement("h2")
+        newElement.id =""
+        newElement.innerHTML = Object.values(highscores[i]);
+        pageContentEl.appendChild(newElement);
+
+
+        // pageContentEl.appendChild(retryButtonEl);
+        // retryButtonEl.addEventListener("click", startQuiz);
+    }
+
 }
 
 
+var scoreFormHandler = function () {
 
-// function highScoreSubmit () {
-// var score = timeLeft 
-// var highscore = localStorage.getItem("highscore");
+    var scoreNameInput = document.querySelector("input[Name='user-name']").value;
 
-// if(!highscore) {
+    while (!scoreNameInput){
+    alert("enter your name")
+    return false;
+    }
 
-//     if (score > highscore) {
-//         localStorage.setItem("highscore", score);
-//     } 
-// }
-// else {
-//     playAgain();
-// }
-// };
+    var score = {
+    Player:scoreNameInput,
+    Score: timeLeft,
+    }
 
-// function highScoreRetrieve () {
+    highscores.push(score)
 
-// }
+    localStorage.setItem("existing",JSON.stringify(highscores));
 
-// function playAgain () {
+    displayHighscores()
+}
 
-// }
 
 startQuizEl.addEventListener("click", startQuiz);
+
+viewHighscoreEl.addEventListener("click", displayHighscores);
