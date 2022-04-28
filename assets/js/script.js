@@ -51,11 +51,6 @@ var choiceThreeEl = document.querySelector("#choice-three");
 var choiceFourEl = document.querySelector("#choice-four");
 
 
-var confirmationEl = document.createElement("h2");
-confirmationEl.id = "confirmation";
-confirmationEl.innerHTML = ""
-
-
 var retryButtonEl = document.createElement("button");
 retryButtonEl.id = "retry-button";
 retryButtonEl.className = "answer-button";
@@ -104,15 +99,8 @@ function startQuiz() {
 
 function incorrectAnswer () {
     timeLeft -= 10;
-
-    confirmationEl.innerHTML = "Incorrect answer provided."
-    pageContentEl.appendChild(confirmationEl);
 }
 
-function correctAnswer() {
-    confirmationEl.innerHTML = "Correct answer!"
-    pageContentEl.appendChild(confirmationEl);
-}
 
 
 function questionOne(){
@@ -158,7 +146,7 @@ function questionOneIncorrect() {
 }
 
 function questionOneCorrect() {
-    correctAnswer();
+
 
     questionTwo();
 
@@ -178,8 +166,7 @@ function questionTwo () {
     pageContentEl.appendChild(answerThreeEl);
     pageContentEl.appendChild(answerFourEl);
 
-    // confirmationEl.innerHTML = "Incorrect answer provided."
-    // pageContentEl.appendChild(confirmationEl);
+
 
     var choiceOneEl = document.querySelector("#choice-one");
     choiceOneEl.removeEventListener("click", questionOneIncorrect);
@@ -209,7 +196,7 @@ function questionTwoIncorrect() {
 }
 
 function questionTwoCorrect() {
-    correctAnswer();
+
 
     questionThree();
 
@@ -257,7 +244,7 @@ function questionThreeIncorrect() {
 }
 
 function questionThreeCorrect() {
-    correctAnswer();
+
     questionFour();
 
 
@@ -303,7 +290,7 @@ function questionFourIncorrect() {
  }
  
  function questionFourCorrect() {
-     correctAnswer();
+
      questionFive();
  
  
@@ -346,7 +333,7 @@ function questionFiveIncorrect() {
 }
 
 function questionFiveCorrect() {
-    correctAnswer();
+
     
     playerScore();
 }
@@ -380,15 +367,14 @@ var displayHighscores = function() {
     console.log(typeof highscores);
 
     for (var i = 0; i < highscores.length; i++) {
-        // createHighscore(highscores[i])
+
         var newElement = document.createElement("h2")
         newElement.id =""
         newElement.innerHTML = Object.values(highscores[i]);
         pageContentEl.appendChild(newElement);
 
 
-        // pageContentEl.appendChild(retryButtonEl);
-        // retryButtonEl.addEventListener("click", startQuiz);
+
     }
 
 }
@@ -399,7 +385,7 @@ var scoreFormHandler = function () {
     var scoreNameInput = document.querySelector("input[Name='user-name']").value;
 
     while (!scoreNameInput){
-    alert("enter your name")
+    alert("Enter your initials.")
     return false;
     }
 
