@@ -364,20 +364,26 @@ var displayHighscores = function() {
     pageContentEl.innerHTML = "<h1>Highscores</h1>";
    
     var highscores = JSON.parse(localStorage.getItem ("existing"))
-    console.log(typeof highscores);
 
-    for (var i = 0; i < highscores.length; i++) {
+    var highscoreSorted = highscores.sort(function(a, b) {
+
+        if (a.Score > b.Score) {
+            return -1
+        }
+        else if (b.Score> a.Score) {
+            return 1
+        }
+        return 0
+    });
+
+    for (var i = 0; i < highscoreSorted.length; i++) {
 
         var newElement = document.createElement("h2")
-        newElement.id =""
-        newElement.innerHTML = Object.values(highscores[i]);
+        newElement.textContent = highscoreSorted[i].Player + " " + highscoreSorted[i].Score;
         pageContentEl.appendChild(newElement);
-
-
-
     }
 
-}
+};
 
 
 var scoreFormHandler = function () {
